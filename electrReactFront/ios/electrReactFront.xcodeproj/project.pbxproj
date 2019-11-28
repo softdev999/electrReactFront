@@ -194,7 +194,6 @@
 				5CA233AA909E4E55EF077CCD /* Pods-electrReactFrontTests.debug.xcconfig */,
 				E12EA02964CF9B4979C78D20 /* Pods-electrReactFrontTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -308,6 +307,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
