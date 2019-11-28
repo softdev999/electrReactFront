@@ -5,6 +5,8 @@ import {
   EDIT_ITEM,
   REMOVE_ITEM,
   UPDATE_SORT_TYPE,
+  UPDATE_HIDE_COMPLETE,
+  TOGGLE_COMPLETE,
 } from './actionTypes';
 
 export const getItemsRequest = createAction(GET_ITEMS.REQUEST);
@@ -24,3 +26,8 @@ export const removeItemSuccess = createAction(REMOVE_ITEM.SUCCESS);
 export const removeItemFailure = createAction(REMOVE_ITEM.FAILURE);
 
 export const updateSortType = createAction(UPDATE_SORT_TYPE);
+export const updateHideComplete = createAction(UPDATE_HIDE_COMPLETE);
+
+export const toggleCompleteRequest = createAction(TOGGLE_COMPLETE.REQUEST);
+export const toggleCompleteSuccess = createAction(TOGGLE_COMPLETE.SUCCESS);
+export const toggleCompleteFailure = createAction(TOGGLE_COMPLETE.FAILURE);

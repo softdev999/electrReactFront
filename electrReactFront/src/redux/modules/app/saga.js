@@ -14,6 +14,10 @@ import {
   removeItemSuccess,
   removeItemFailure,
   updateSortType,
+  updateHideComplete,
+  toggleCompleteRequest,
+  toggleCompleteSuccess,
+  toggleCompleteFailure,
 } from './actions';
 
 const getItemsFromLocal = state => state.app.taskList;
@@ -41,10 +45,42 @@ function* addItemWorker({payload}) {
 
 function* editItemWorker({payload}) {}
 
-function* removeItemWorker({payload}) {}
+function* removeItemWorker({payload}) {
+  try {
+    let response = yield select(getItemsFromLocal);
+    const removeIndex = response
+      .map(function(item) {
+        return item.id;
+      })
+      .indexOf(payload);
+    response.splice(removeIndex, 1);
+    yield put(removeItemSuccess(response));
+  } catch (err) {
+    yield put(removeItemFailure(err.message));
+  }
+}
 
 function* updateSortTypeWorker({payload}) {
   yield put(updateSortType(payload));
+}
+
+function* updateHideCompleteWorker({payload}) {
+  yield put(updateHideComplete(payload));
+}
+
+function* toggleCompleteWorker({payload}) {
+  const {id, isChanged} = payload;
+  try {
+    let response = yield select(getItemsFromLocal);
+    response.forEach(res => {
+      if (res.id === id) {
+        res.isCompleted = isChanged;
+      }
+    });
+    yield put(toggleCompleteSuccess(response));
+  } catch (err) {
+    yield put(toggleCompleteFailure(err.message));
+  }
 }
 
 export default function*() {
@@ -53,4 +89,6 @@ export default function*() {
   yield takeLatest(editItemRequest, editItemWorker);
   yield takeLatest(removeItemRequest, removeItemWorker);
   yield takeLatest(updateSortType, updateSortTypeWorker);
+  yield takeLatest(updateHideComplete, updateHideCompleteWorker);
+  yield takeLatest(toggleCompleteRequest, toggleCompleteWorker);
 }

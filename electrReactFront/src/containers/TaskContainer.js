@@ -6,6 +6,8 @@ import {
   addItemRequest,
   editItemRequest,
   removeItemRequest,
+  updateHideComplete,
+  toggleCompleteRequest,
 } from '../redux/modules/app/actions';
 import TaskPage from '../pages/TaskPage';
 
@@ -14,16 +16,22 @@ TaskPage.propTypes = {
   addTodoItem: PropTypes.func.isRequired,
   editTodoItem: PropTypes.func.isRequired,
   removeTodoItem: PropTypes.func.isRequired,
+  todoList: PropTypes.array,
+  bHideChecked: PropTypes.bool,
 };
 
 export default connect(
   state => ({
     todoList: appSelector.selectTaskList(state),
+    bHideChecked: appSelector.selectHideComplete(state),
+    isLoading: appSelector.selectLoadingStatus(state),
   }),
   dispatch => ({
     getTodolists: () => dispatch(getItemsRequest()),
     addTodoItem: data => dispatch(addItemRequest(data)),
     editTodoItem: data => dispatch(editItemRequest(data)),
     removeTodoItem: data => dispatch(removeItemRequest(data)),
+    updateHideComplete: data => dispatch(updateHideComplete(data)),
+    toggleComplete: data => dispatch(toggleCompleteRequest(data)),
   }),
 )(TaskPage);
