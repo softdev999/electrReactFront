@@ -52,6 +52,9 @@ class TaskPage extends Component {
     const {addTodoItem} = this.props;
     const {taskName} = this.state;
 
+    if (taskName == '') {
+      return;
+    }
     const task = {};
     task.id = uid();
     task.description = taskName;
