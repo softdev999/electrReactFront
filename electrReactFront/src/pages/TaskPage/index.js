@@ -52,7 +52,7 @@ class TaskPage extends Component {
     const {addTodoItem} = this.props;
     const {taskName} = this.state;
 
-    if (taskName == '') {
+    if (taskName === '') {
       return;
     }
     const task = {};

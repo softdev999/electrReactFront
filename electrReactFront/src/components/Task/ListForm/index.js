@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 10,
+    flexDirection: 'row',
   },
   headerText: {
     textAlign: 'left',
@@ -21,6 +22,15 @@ const styles = StyleSheet.create({
     height: 3,
     width: '100%',
     backgroundColor: 'black',
+  },
+  result: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    color: 'black',
+    alignSelf: 'center',
+  },
+  headerTitle: {
+    flex: 1,
   },
 });
 
@@ -57,9 +67,12 @@ class ListForm extends PureComponent {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={onSort}>
+          <TouchableOpacity style={styles.headerTitle} onPress={onSort}>
             <Text style={styles.headerText}>Tasks</Text>
           </TouchableOpacity>
+          <View style={styles.result}>
+            <Text>{itemList.length}</Text>
+          </View>
         </View>
         <View style={styles.borderLine} />
         <FlatList
