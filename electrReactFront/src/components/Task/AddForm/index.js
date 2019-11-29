@@ -3,15 +3,11 @@ import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 
 import {COLOR} from '../../../constants/styles';
-
 import styles from './styles';
 
 class TaskAdd extends PureComponent {
-  onPressHideButton = checked => {};
-
   render() {
     const {placeHolder, taskName, onChangeTaskName, onCreate} = this.props;
-
     return (
       <View style={styles.container}>
         <View style={styles.wrapper}>

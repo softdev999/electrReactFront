@@ -30,15 +30,6 @@ class ListForm extends PureComponent {
     }
   }
 
-  _renderListItem = item => {
-    const {
-      onEditItem,
-      onRemoveItem,
-      onCompleteItem,
-      hideCompleted,
-    } = this.props;
-  };
-
   render() {
     const {
       itemList,
@@ -56,6 +47,8 @@ class ListForm extends PureComponent {
           renderItem={({item}) => (
             <ListTodoItem
               item={item}
+              isCompleted={item.isCompleted}
+              isUpdated={item.description}
               onCompleteItem={onCompleteItem}
               onEditItem={onEditItem}
               onRemoveItem={onRemoveItem}

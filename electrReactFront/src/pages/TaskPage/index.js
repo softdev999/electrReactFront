@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import CheckBox from 'react-native-custom-checkbox';
 
-import PropTypes from 'prop-types';
-
 // import components
 import Header from '../../components/Header';
 import TaskAddForm from '../../components/Task/AddForm';
 import TaskList from '../../components/Task/ListForm';
+import TaskEditForm from '../../components/Modals/EditModal';
 
 // import helpers
 import uid from '../../helpers/uid';
@@ -21,8 +20,21 @@ class TaskPage extends Component {
     this.state = {
       taskList: todoList,
       taskName: '',
+      isEdit: false,
+      editingId: '',
+      editingName: '',
     };
   }
+
+  componentDidMount = () => {
+    const {getTodolists} = this.props;
+    getTodolists();
+  };
+
+  UNSAFE_componentWillReceiveProps = nextProps => {
+    console.log(nextProps.todoList);
+    this.setState({taskList: nextProps.todoList});
+  };
 
   onPressHideButton = isChecked => {
     const {updateHideComplete} = this.props;
@@ -31,6 +43,10 @@ class TaskPage extends Component {
 
   onChangeTaskName = newName => {
     this.setState({taskName: newName});
+  };
+
+  onChangeUpdateName = newUpdateName => {
+    this.setState({editingName: newUpdateName});
   };
 
   onCreate = () => {
@@ -47,17 +63,30 @@ class TaskPage extends Component {
     this.setState({taskName: ''});
   };
 
-  onCompleteItem = (id, isChanged) => {
-    const {toggleComplete, todoList} = this.props;
-
-    console.log('on complete: todolist ', todoList);
-
-    toggleComplete({id, isChanged});
-    this.setState({taskList: todoList});
+  onUpdate = () => {
+    const {editingId, editingName} = this.state;
+    const {editTodoItem} = this.props;
+    editTodoItem({id: editingId, description: editingName});
+    this.setState({isEdit: false});
   };
 
-  onEditItem = id => {
-    console.log('edit: ', id);
+  onUpdateCancel = () => {
+    this.setState({isEdit: false, currentTask: null});
+  };
+
+  onCompleteItem = async (id, isChanged) => {
+    const {toggleComplete} = this.props;
+    await toggleComplete({id, isChanged});
+    // const {todoList} = this.props;
+    // this.setState({taskList: todoList});
+  };
+
+  onEditItem = item => {
+    this.setState({
+      isEdit: true,
+      editingName: item.description,
+      editingId: item.id,
+    });
   };
 
   onRemoveItem = id => {
@@ -82,11 +111,20 @@ class TaskPage extends Component {
   };
 
   render() {
-    const {taskName, taskList} = this.state;
+    const {taskName, taskList, isEdit, editingName} = this.state;
     const {bHideChecked} = this.props;
     return (
       <View style={styles.container}>
         <Header text={'Task List'} />
+        {isEdit && (
+          <TaskEditForm
+            description={editingName}
+            onChangeTaskName={this.onChangeUpdateName}
+            onUpdate={this.onUpdate}
+            onCancel={this.onUpdateCancel}
+          />
+        )}
+
         <View style={styles.mainContainer}>
           <View style={styles.addForm}>
             <TaskAddForm

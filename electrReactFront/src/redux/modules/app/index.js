@@ -14,6 +14,7 @@ import {
   removeItemFailure,
   updateSortType,
   updateHideComplete,
+  toggleCompleteRequest,
   toggleCompleteSuccess,
   toggleCompleteFailure,
 } from './actions';
@@ -33,6 +34,7 @@ export default handleActions(
       addItemRequest,
       editItemRequest,
       removeItemRequest,
+      toggleCompleteRequest,
     )]: (state, action) => ({
       ...state,
       isLoading: true,
@@ -42,6 +44,7 @@ export default handleActions(
       addItemSuccess,
       editItemSuccess,
       removeItemSuccess,
+      toggleCompleteSuccess,
     )]: (state, {payload}) => ({
       ...state,
       taskList: payload,
@@ -65,10 +68,6 @@ export default handleActions(
     [updateHideComplete]: (state, {payload}) => ({
       ...state,
       hideComplete: payload,
-    }),
-    [toggleCompleteSuccess]: (state, {payload}) => ({
-      ...state,
-      taskList: payload,
     }),
   },
   defaultState,

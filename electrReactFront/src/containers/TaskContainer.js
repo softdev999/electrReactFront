@@ -22,7 +22,7 @@ TaskPage.propTypes = {
 
 export default connect(
   state => ({
-    todoList: appSelector.selectTaskList(state),
+    todoList: appSelector.visibleTaskSelector(state),
     bHideChecked: appSelector.selectHideComplete(state),
     isLoading: appSelector.selectLoadingStatus(state),
   }),

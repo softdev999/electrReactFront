@@ -69,10 +69,7 @@ class ListTodoItem extends PureComponent {
       onCompleteItem,
       hideCompleted,
     } = this.props;
-    console.log('render item', item);
-    if (hideCompleted && item.isCompleted) {
-      return null;
-    }
+
     return (
       <View>
         <View style={styles.container}>
@@ -87,7 +84,7 @@ class ListTodoItem extends PureComponent {
             {item.description}
           </Text>
           <View style={styles.buttonView}>
-            <TouchableOpacity onPress={() => onEditItem(item.id)}>
+            <TouchableOpacity onPress={() => onEditItem(item)}>
               <Text style={styles.buttonTextEdit}>Edit</Text>
             </TouchableOpacity>
             <Text> / </Text>
