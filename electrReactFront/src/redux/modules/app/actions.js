@@ -25,7 +25,8 @@ export const removeItemRequest = createAction(REMOVE_ITEM.REQUEST);
 export const removeItemSuccess = createAction(REMOVE_ITEM.SUCCESS);
 export const removeItemFailure = createAction(REMOVE_ITEM.FAILURE);
 
-export const updateSortType = createAction(UPDATE_SORT_TYPE);
+export const updateSortTypeRequest = createAction(UPDATE_SORT_TYPE.REQUEST);
+export const updateSortTypeSuccess = createAction(UPDATE_SORT_TYPE.SUCCESS);
 export const updateHideComplete = createAction(UPDATE_HIDE_COMPLETE);
 
 export const toggleCompleteRequest = createAction(TOGGLE_COMPLETE.REQUEST);

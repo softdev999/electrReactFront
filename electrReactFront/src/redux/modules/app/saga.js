@@ -13,7 +13,8 @@ import {
   removeItemRequest,
   removeItemSuccess,
   removeItemFailure,
-  updateSortType,
+  updateSortTypeRequest,
+  updateSortTypeSuccess,
   updateHideComplete,
   toggleCompleteRequest,
   toggleCompleteSuccess,
@@ -79,7 +80,7 @@ function* removeItemWorker({payload}) {
 }
 
 function* updateSortTypeWorker({payload}) {
-  yield put(updateSortType(payload));
+  yield put(updateSortTypeSuccess(payload));
 }
 
 function* updateHideCompleteWorker({payload}) {
@@ -124,7 +125,7 @@ export default function*() {
   yield takeLatest(addItemRequest, addItemWorker);
   yield takeLatest(editItemRequest, editItemWorker);
   yield takeLatest(removeItemRequest, removeItemWorker);
-  yield takeLatest(updateSortType, updateSortTypeWorker);
+  yield takeLatest(updateSortTypeRequest, updateSortTypeWorker);
   yield takeLatest(updateHideComplete, updateHideCompleteWorker);
   yield takeLatest(toggleCompleteRequest, toggleCompleteWorker);
 }

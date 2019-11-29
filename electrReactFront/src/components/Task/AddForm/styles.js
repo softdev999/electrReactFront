@@ -4,17 +4,15 @@ import {COLOR, FONT_SIZE, FONT_WEIGHT} from '../../../constants/styles';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: COLOR.red,
-    paddingHorizontal: vw('3%'),
-    marginHorizontal: 20,
+    paddingHorizontal: vw('1%'),
   },
   wrapper: {
     flexDirection: 'row',
-    // alignItems: 'center',
     width: '100%',
     paddingHorizontal: 10,
     marginVertical: 20,
     marginRight: 10,
+    justifyContent: 'space-between',
   },
   text: {
     color: COLOR.white,
@@ -23,15 +21,13 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   input: {
-    fontSize: FONT_SIZE.h4,
+    fontSize: FONT_SIZE.h5,
     color: COLOR.gunPowder,
     height: '100%',
     paddingHorizontal: '2%',
     width: vw('70%'),
     borderColor: 'black',
     borderWidth: 3,
-    paddingVertical: 10,
-    marginRight: vw('2%'),
   },
   placeholderStyle: {
     fontSize: FONT_SIZE.h4,

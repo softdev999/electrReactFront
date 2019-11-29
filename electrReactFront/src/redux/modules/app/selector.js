@@ -6,23 +6,24 @@ const selectTaskList = state => state.app.taskList;
 const selectSortType = state => state.app.sortType;
 const selectHideComplete = state => state.app.hideComplete;
 
-const sortDateSelector = createSelector(
-  [selectSortType, selectTaskList],
-  (sortType, tasks) => {
+const visibleTaskSelector = createSelector(
+  [selectLoadingStatus, selectHideComplete, selectSortType, selectTaskList],
+  (isLoading, bCompleted, sortType, tasks) => {
+    console.log(sortType, tasks);
     switch (sortType) {
-      case 1:
+      case 0:
         tasks.sort(function(a, b) {
           return new Date(b.date_created) - new Date(a.date_created);
         });
         break;
-      case 2:
+      case 1:
         tasks.sort(function(a, b) {
-          return a.description < b.description;
+          return a.description.localeCompare(b.description);
         });
         break;
-      case 3:
+      case 2:
         tasks.sort(function(a, b) {
-          return a.description > b.description;
+          return b.description.localeCompare(a.description);
         });
         break;
       default:
@@ -31,17 +32,11 @@ const sortDateSelector = createSelector(
         });
         break;
     }
-    return tasks;
-  },
-);
-
-const visibleTaskSelector = createSelector(
-  [selectLoadingStatus, selectHideComplete, sortDateSelector],
-  (isLoading, bCompleted, sortedItems) => {
+    console.log('after: ', tasks);
     if (bCompleted) {
-      return sortedItems.filter(item => !item.isCompleted);
+      return tasks.filter(item => !item.isCompleted);
     } else {
-      return sortedItems;
+      return tasks;
     }
   },
 );

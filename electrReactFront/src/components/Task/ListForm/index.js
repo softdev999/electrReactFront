@@ -1,10 +1,26 @@
 import React, {PureComponent} from 'react';
-import {View, FlatList, StyleSheet, Text} from 'react-native';
+import {View, FlatList, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import ListTodoItem from './ListTodoItem';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 5,
+    width: '100%',
+  },
+  header: {
+    padding: 10,
+  },
+  headerText: {
+    textAlign: 'left',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  borderLine: {
+    height: 3,
+    width: '100%',
+    backgroundColor: 'black',
   },
 });
 
@@ -36,10 +52,16 @@ class ListForm extends PureComponent {
       onEditItem,
       onRemoveItem,
       onCompleteItem,
-      hideCompleted,
+      onSort,
     } = this.props;
     return (
       <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={onSort}>
+            <Text style={styles.headerText}>Tasks</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.borderLine} />
         <FlatList
           data={itemList}
           extraData={this.state.flag}
@@ -52,7 +74,6 @@ class ListForm extends PureComponent {
               onCompleteItem={onCompleteItem}
               onEditItem={onEditItem}
               onRemoveItem={onRemoveItem}
-              hideCompleted={hideCompleted}
             />
           )}
         />

@@ -12,17 +12,17 @@ import {
   removeItemRequest,
   removeItemSuccess,
   removeItemFailure,
-  updateSortType,
   updateHideComplete,
   toggleCompleteRequest,
   toggleCompleteSuccess,
   toggleCompleteFailure,
+  updateSortTypeSuccess,
 } from './actions';
 
 const defaultState = {
   isLoading: false,
   taskList: [],
-  sortType: 1,
+  sortType: 0,
   hideComplete: false,
   errorMessage: '',
 };
@@ -61,7 +61,7 @@ export default handleActions(
       isLoading: false,
       errorMessage: payload,
     }),
-    [updateSortType]: (state, {payload}) => ({
+    [updateSortTypeSuccess]: (state, {payload}) => ({
       ...state,
       sortType: payload,
     }),

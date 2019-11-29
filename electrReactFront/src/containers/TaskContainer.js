@@ -8,6 +8,7 @@ import {
   removeItemRequest,
   updateHideComplete,
   toggleCompleteRequest,
+  updateSortTypeRequest,
 } from '../redux/modules/app/actions';
 import TaskPage from '../pages/TaskPage';
 
@@ -25,6 +26,7 @@ export default connect(
     todoList: appSelector.visibleTaskSelector(state),
     bHideChecked: appSelector.selectHideComplete(state),
     isLoading: appSelector.selectLoadingStatus(state),
+    currentSortType: appSelector.selectSortType(state),
   }),
   dispatch => ({
     getTodolists: () => dispatch(getItemsRequest()),
@@ -33,5 +35,6 @@ export default connect(
     removeTodoItem: data => dispatch(removeItemRequest(data)),
     updateHideComplete: data => dispatch(updateHideComplete(data)),
     toggleComplete: data => dispatch(toggleCompleteRequest(data)),
+    updateSortType: data => dispatch(updateSortTypeRequest(data)),
   }),
 )(TaskPage);

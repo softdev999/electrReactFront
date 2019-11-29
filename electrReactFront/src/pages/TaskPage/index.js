@@ -32,7 +32,6 @@ class TaskPage extends Component {
   };
 
   UNSAFE_componentWillReceiveProps = nextProps => {
-    console.log(nextProps.todoList);
     this.setState({taskList: nextProps.todoList});
   };
 
@@ -74,11 +73,9 @@ class TaskPage extends Component {
     this.setState({isEdit: false, currentTask: null});
   };
 
-  onCompleteItem = async (id, isChanged) => {
+  onCompleteItem = (id, isChanged) => {
     const {toggleComplete} = this.props;
-    await toggleComplete({id, isChanged});
-    // const {todoList} = this.props;
-    // this.setState({taskList: todoList});
+    toggleComplete({id, isChanged});
   };
 
   onEditItem = item => {
@@ -110,6 +107,13 @@ class TaskPage extends Component {
     );
   };
 
+  onSort = () => {
+    const {currentSortType, updateSortType} = this.props;
+    const newType = (currentSortType + 1) % 3;
+
+    updateSortType(newType);
+  };
+
   render() {
     const {taskName, taskList, isEdit, editingName} = this.state;
     const {bHideChecked} = this.props;
@@ -135,11 +139,11 @@ class TaskPage extends Component {
           </View>
           <View style={styles.contentBody}>
             <TaskList
+              onSort={this.onSort}
               itemList={taskList}
               onCompleteItem={this.onCompleteItem}
               onEditItem={this.onEditItem}
               onRemoveItem={this.onRemoveItem}
-              hideCompleted={bHideChecked}
             />
           </View>
           <TouchableOpacity style={styles.bottomBanner}>

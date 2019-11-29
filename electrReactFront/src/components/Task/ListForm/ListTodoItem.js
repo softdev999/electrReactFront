@@ -9,14 +9,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding: 10,
-    marginLeft: 16,
-    marginRight: 16,
-    marginTop: 8,
-    marginBottom: 5,
     borderRadius: 5,
     backgroundColor: '#FFF',
     elevation: 2,
-    paddingLeft: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -62,13 +57,7 @@ const styles = StyleSheet.create({
 
 class ListTodoItem extends PureComponent {
   render() {
-    const {
-      item,
-      onRemoveItem,
-      onEditItem,
-      onCompleteItem,
-      hideCompleted,
-    } = this.props;
+    const {item, onRemoveItem, onEditItem, onCompleteItem} = this.props;
 
     return (
       <View>
