@@ -13,6 +13,7 @@ import uid from '../../helpers/uid';
 
 import styles from './styles';
 
+//Task Main Page
 class TaskPage extends Component {
   constructor(props) {
     super(props);
@@ -40,14 +41,17 @@ class TaskPage extends Component {
     updateHideComplete(isChecked);
   };
 
+  //Create Input Box Change Event
   onChangeTaskName = newName => {
     this.setState({taskName: newName});
   };
 
+  //Edit Input Box Change Event
   onChangeUpdateName = newUpdateName => {
     this.setState({editingName: newUpdateName});
   };
 
+  //Create Task Button Event
   onCreate = () => {
     const {addTodoItem} = this.props;
     const {taskName} = this.state;
@@ -65,6 +69,7 @@ class TaskPage extends Component {
     this.setState({taskName: ''});
   };
 
+  //Update Task Button Event
   onUpdate = () => {
     const {editingId, editingName} = this.state;
     const {editTodoItem} = this.props;
@@ -72,15 +77,18 @@ class TaskPage extends Component {
     this.setState({isEdit: false});
   };
 
+  //Update Cancel
   onUpdateCancel = () => {
     this.setState({isEdit: false, currentTask: null});
   };
 
+  //Task Complete Item
   onCompleteItem = (id, isChanged) => {
     const {toggleComplete} = this.props;
     toggleComplete({id, isChanged});
   };
 
+  // Task Edit Item
   onEditItem = item => {
     this.setState({
       isEdit: true,
@@ -89,6 +97,7 @@ class TaskPage extends Component {
     });
   };
 
+  //Task Remove Item
   onRemoveItem = id => {
     Alert.alert(
       'Remove',
@@ -110,6 +119,7 @@ class TaskPage extends Component {
     );
   };
 
+  //Task Sort Items
   onSort = () => {
     const {currentSortType, updateSortType} = this.props;
     const newType = (currentSortType + 1) % 3;

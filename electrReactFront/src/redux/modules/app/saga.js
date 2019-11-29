@@ -25,10 +25,7 @@ const getItemsFromLocal = state => state.app.taskList;
 const getSortType = state => state.app.sortType;
 function* getItemsWorker({payload}) {
   try {
-    // const response = yield call(AppModule.getItmes, payload); //api call
-
     const response = yield select(getItemsFromLocal);
-    // const sortedResponse = yield sortTasks(response);
     yield put(getItemsSuccess(response));
   } catch (err) {
     yield put(getItemsFailure(err.message));
